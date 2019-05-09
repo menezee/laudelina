@@ -1,79 +1,99 @@
-import React, {useState} from 'react';
-import {AutoComplete, Col, Layout, Row} from 'antd';
+import React, {Fragment, useEffect, useState} from 'react';
+import {Col, Icon, Layout, Row} from 'antd';
+import {css, withStyles} from './Theme';
+import LaudelinaIcon from './laudelina.jpeg';
+import Question from './Question';
 
-const {Header, Footer, Content} = Layout;
+const {Header, Content} = Layout;
 
-const dataSource = [
-  {
-    value: '1',
-    text: 'Quais são meus direitos?',
-    answer: 'Direito 1, Direito 2, e Direito 3',
-  },
-  {
-    value: '2',
-    text: 'Qual é o salário mínimo?',
-    answer: 'R$1.000,00 (mil)',
-  },
-  {
-    value: '3',
-    text: 'Quanto tempo de almoço eu tenho por dia?',
-    answer: '1h',
-  },
-  {
-    value: '4',
-    text: 'Quantos dias de férias tenho direito?',
-    answer: '30 dias por ano',
-  },
-];
+function useNetlifyQuestions() {
+  const [questions, setQuestions] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const res = await fetch('https://naughty-davinci-c8d9f1.netlify.com/.netlify/functions/hello');
+      const json = await res.json();
+      setQuestions(json);
+    })()
+  }, [])
 
-function filterOptionHandler(inputValue, option) {
-  return option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1;
+  return questions;
 }
 
-function App() {
-  const [selectedQuestion, setSelectedQuestion] = useState();
-  const onSelect = e => {
-    setSelectedQuestion(e);
-  };
+function App({styles}) {
+  const questions = useNetlifyQuestions();
+  const [selectedQuestion, setSelectedQuestion] = useState(null)
 
   return (
-    <>
-      <Header>
-        <span style={{color: 'white'}}>
-        Laudelina
-        </span>
+    <Fragment>
+      <Header {...css(styles.header)}>
+        <div  {...css(styles.logo)}>
+          <img src={LaudelinaIcon} alt='logo'/>
+          <span {...css(styles.logoText)}>LAUDELINA</span>
+        </div>
+        <div {...css(styles.subTitle)}>
+          Perguntas Frequentes
+        </div>
       </Header>
       <Content>
         <Row type='flex' justify='center'>
-          <Col span={18}>
-            <AutoComplete
-              dataSource={dataSource}
-              style={{width: '100%'}}
-              onSelect={onSelect}
-              filterOption={filterOptionHandler}
-              placeholder='Pergunta'
-            />
-          </Col>
-        </Row>
-        <Row type='flex' justify='center' style={{ paddingTop: '20px' }}>
-          <Col span={18}>
+          <Col span={12} style={{ marginTop: '-50px' }}>
             {
-              dataSource
-                .filter(({value}) => value === selectedQuestion)
-                .map(({answer}, i) => (
-                  <span key={i}>
-                    {answer}
-                  </span>
+              selectedQuestion !== null ? (
+                <Question message={questions[selectedQuestion].answer} onClick={() => {
+                  setSelectedQuestion(null)
+                }}>
+                  <Icon type='left'/>
+                </Question>
+              ) : (
+                questions.map(({question}, i) => (
+                  <Question
+                    message={question}
+                    key={i}
+                    onClick={() => {
+                      setSelectedQuestion(i)
+                    }}
+                  >
+                    <Icon type='right'/>
+                  </Question>
                 ))
+              )
             }
           </Col>
         </Row>
       </Content>
-      <Footer>
-        Footer
-      </Footer>
-    </>
+    </Fragment>
   );
 }
 
-export default App;
+export default withStyles(({color}) => ({
+  header: {
+    backgroundColor: color.primary,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 'unset',
+    flexDirection: 'column',
+    lineHeight: '15px',
+  },
+  logo: {
+    margin: '15px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  logoText: {
+    fontWeight: 900,
+    color: 'white',
+    textShadow: '1px 1px 1px black',
+    letterSpacing: '1px',
+    fontSize: '20px',
+    fontFamily: 'sans-serif',
+    paddingLeft: '10px',
+  },
+  subTitle: {
+    color: 'white',
+    fontFamily: 'sans-serif',
+    fontSize: '16px',
+    paddingBottom: '80px',
+    paddingTop: '10px',
+  },
+}))(App);
