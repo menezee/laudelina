@@ -36,7 +36,7 @@ function App({styles}) {
       </Header>
       <Content>
         <Row type='flex' justify='center'>
-          <Col span={12} style={{ marginTop: '-50px' }}>
+          <Col xs={22} sm={20} md={20} lg={12} style={{ marginTop: '-50px' }}>
             {
               selectedQuestion !== null ? (
                 <Question message={questions[selectedQuestion].answer} onClick={() => {

@@ -9,8 +9,8 @@ function Question({message, onClick, children}) {
       onClick={onClick}
     >
       <Row>
-        <Col span={6}/>
-        <Col span={15}>
+        <Col span={4}/>
+        <Col span={17}>
           {message}
         </Col>
         <Col span={3}>
