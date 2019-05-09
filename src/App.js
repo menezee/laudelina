@@ -10,7 +10,8 @@ function useNetlifyQuestions() {
   const [questions, setQuestions] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await fetch('https://naughty-davinci-c8d9f1.netlify.com/.netlify/functions/hello');
+      const res = await fetch('https://api.netlify.com/api/v1/sites/62cd8fb2-b673-48eb-82cc-4a33cd8180bb/submissions?access_token=a3a5fdab6a498e6ffd85facab456fa9432c7d7e0e3f8edfc8ee897fbb10473b9');
+      // const res = await fetch('https://naughty-davinci-c8d9f1.netlify.com/.netlify/functions/hello');
       const json = await res.json();
       setQuestions(json);
     })()
@@ -39,15 +40,15 @@ function App({styles}) {
           <Col xs={22} sm={20} md={20} lg={12} style={{ marginTop: '-50px' }}>
             {
               selectedQuestion !== null ? (
-                <Question message={questions[selectedQuestion].answer} onClick={() => {
+                <Question message={questions[selectedQuestion].human_fields.Answer} onClick={() => {
                   setSelectedQuestion(null)
                 }}>
                   <Icon type='left'/>
                 </Question>
               ) : (
-                questions.map(({question}, i) => (
+                questions.map((question, i) => (
                   <Question
-                    message={question}
+                    message={question.human_fields.Question}
                     key={i}
                     onClick={() => {
                       setSelectedQuestion(i)
