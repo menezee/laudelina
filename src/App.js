@@ -1,10 +1,12 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Col, Icon, Layout, Row} from 'antd';
+import {Col, Collapse, Icon, Layout, Row, Typography} from 'antd';
 import {css, withStyles} from './Theme';
-import LaudelinaIcon from './laudelina.jpeg';
-import Question from './Question';
+import Panel from './components/Panel';
+import parseQuestion from './adapters/Question';
+import Header from './components/Header';
 
-const {Header, Content} = Layout;
+const {Content} = Layout;
+const {Title} = Typography;
 
 function useNetlifyQuestions() {
   const [questions, setQuestions] = useState([]);
@@ -22,43 +24,35 @@ function useNetlifyQuestions() {
 
 function App({styles}) {
   const questions = useNetlifyQuestions();
-  const [selectedQuestion, setSelectedQuestion] = useState(null)
 
   return (
     <Fragment>
-      <Header {...css(styles.header)}>
-        <div  {...css(styles.logo)}>
-          <img src={LaudelinaIcon} alt='logo'/>
-          <span {...css(styles.logoText)}>LAUDELINA</span>
-        </div>
-        <div {...css(styles.subTitle)}>
-          Perguntas Frequentes
-        </div>
-      </Header>
+      <Header/>
       <Content>
         <Row type='flex' justify='center'>
-          <Col xs={22} sm={20} md={20} lg={12} style={{ marginTop: '-50px' }}>
-            {
-              selectedQuestion !== null ? (
-                <Question message={questions[selectedQuestion].human_fields.Answer} onClick={() => {
-                  setSelectedQuestion(null)
-                }}>
-                  <Icon type='left'/>
-                </Question>
-              ) : (
-                questions.map((question, i) => (
-                  <Question
-                    message={question.human_fields.Question}
-                    key={i}
-                    onClick={() => {
-                      setSelectedQuestion(i)
-                    }}
-                  >
-                    <Icon type='right'/>
-                  </Question>
-                ))
-              )
-            }
+          <Col xs={22} sm={20} md={20} lg={12}>
+            <Title level={3} {...css(styles.title)}>Direitos</Title>
+            <Collapse
+              bordered={false}
+              expandIcon={() => <Icon style={{color: '#F0770E'}} type='plus-circle'/>}
+              expandIconPosition='right'
+              accordion
+              style={{backgroundColor: 'transparent'}}
+            >
+              {
+                questions
+                  .map(parseQuestion)
+                  .map(({question, answer}, i) => (
+                    <Panel
+                      children={answer}
+                      header={question}
+                      key={i}
+                    />
+                  ))
+              }
+
+            </Collapse>
+
           </Col>
         </Row>
       </Content>
@@ -67,34 +61,16 @@ function App({styles}) {
 }
 
 export default withStyles(({color}) => ({
-  header: {
-    backgroundColor: color.primary,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 'unset',
-    flexDirection: 'column',
-    lineHeight: '15px',
+  panel: {
+    marginBottom: '24px',
+    backgroundColor: color.display,
+    fontWeight: '500',
   },
-  logo: {
-    margin: '15px',
-    display: 'flex',
-    alignItems: 'center',
+  title: {
+    marginTop: '20px',
+    marginBottom: '10px',
   },
-  logoText: {
-    fontWeight: 900,
-    color: 'white',
-    textShadow: '1px 1px 1px black',
-    letterSpacing: '1px',
-    fontSize: '20px',
-    fontFamily: 'sans-serif',
-    paddingLeft: '10px',
-  },
-  subTitle: {
-    color: 'white',
-    fontFamily: 'sans-serif',
-    fontSize: '16px',
-    paddingBottom: '80px',
-    paddingTop: '10px',
+  expandIcon: {
+    color: color.primary,
   },
 }))(App);

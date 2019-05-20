@@ -1,3 +1,22 @@
 body {
   background-color: #EAEAEA;
 }
+
+@font-face {
+  font-family: "Humanst521 BT";
+  src: url("fonts/humanst521 bt.ttf");
+}
+
+.question-panel {
+  margin-bottom: 24px;
+  background-color: white;
+  font-weight: 500;
+}
+
+.question-panel--selected {
+  border: 1px solid #F0770E !important;
+}
+
+.question-panel--selected > :first-child {
+  color: #F0770E !important;
+}
