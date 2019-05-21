@@ -69,6 +69,7 @@ export default withStyles(({color}) => ({
   title: {
     marginTop: '20px',
     marginBottom: '10px',
+    fontFamily: 'Humanst521 BT',
   },
   expandIcon: {
     color: color.primary,

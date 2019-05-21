@@ -4,8 +4,9 @@ import {css, withStyles} from 'react-with-styles';
 
 const MyTheme = {
   color: {
-    primary: '#F0770E',
+    primary: '#ED6D02',
     secondary: '#EAEAEA',
+    bottomHeader: '#974602',
     display: 'white',
   },
 };
