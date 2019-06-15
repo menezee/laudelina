@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Icon, Layout, Row, Typography} from 'antd';
+import {Col, Layout, Row, Typography} from 'antd';
 import {css, withStyles} from '../Theme';
 import LaudelinaIcon from '../images/laudelina.png';
 
@@ -12,16 +12,11 @@ function Header({styles}) {
       <Row type='flex' justify='center' {...css(styles.topHeader)}>
         <Col xs={22} sm={20} md={20} lg={12}>
           <Row type='flex' style={{paddingTop: '10px'}}>
-            <Col span={6} {...css(styles.flex)}>
+            <Col span={12} {...css(styles.flex)}>
               <img {...css(styles.laudelinaIcon)} src={LaudelinaIcon} alt='laudelina icon'/>
               <Title level={4} {...css(styles.topHeaderTitle)}>
                 Laudelina
               </Title>
-            </Col>
-            <Col span={10} offset={8} {...css(styles.flex, styles.duvida)}>
-              <a href="mailto:someone@example.com?Subject=Hello%20again" target="_self" rel='noopener noreferrer'>
-                <span style={{ color: 'white' }}>Envie sua dúvida</span> <Icon type='mail' {...css(styles.mailIcon)}/>
-              </a>
             </Col>
           </Row>
         </Col>
