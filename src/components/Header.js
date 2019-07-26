@@ -12,7 +12,7 @@ function Header({styles}) {
       <Row type='flex' justify='center' {...css(styles.topHeader)}>
         <Col xs={22} sm={20} md={20} lg={12}>
           <Row type='flex' style={{paddingTop: '10px'}}>
-            <Col span={12} {...css(styles.flex)}>
+            <Col span={24} {...css(styles.flex)}>
               <img {...css(styles.laudelinaIcon)} src={LaudelinaIcon} alt='laudelina icon'/>
               <Title level={4} {...css(styles.topHeaderTitle)}>
                 Laudelina
