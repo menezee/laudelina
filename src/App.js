@@ -1,58 +1,47 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment} from 'react';
 import {Col, Collapse, Icon, Layout, Row, Typography} from 'antd';
-import {css, withStyles} from './Theme';
-import Panel from './components/Panel';
-import parseQuestion from './adapters/Question';
-import Header from './components/Header';
+import Panel from './components/panel';
+import Header from './components/header/';
+import questions from './data/questions';
+import styles from './app.module.scss';
 
 const {Content} = Layout;
 const {Title} = Typography;
 
-function useNetlifyQuestions() {
-  const [questions, setQuestions] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const res = await fetch('https://api.netlify.com/api/v1/sites/62cd8fb2-b673-48eb-82cc-4a33cd8180bb/submissions?access_token=a3a5fdab6a498e6ffd85facab456fa9432c7d7e0e3f8edfc8ee897fbb10473b9');
-      // const res = await fetch('https://naughty-davinci-c8d9f1.netlify.com/.netlify/functions/hello');
-      const json = await res.json();
-      setQuestions(json);
-    })()
-  }, [])
-
-  return questions;
-}
-
-function App({styles}) {
-  const questions = useNetlifyQuestions();
-
+function App() {
   return (
     <Fragment>
       <Header/>
       <Content>
         <Row type='flex' justify='center'>
           <Col xs={22} sm={20} md={20} lg={12}>
-            <Title level={3} {...css(styles.title)}>Direitos</Title>
-            <Collapse
-              bordered={false}
-              expandIcon={() => <Icon style={{color: '#F0770E'}} type='plus-circle'/>}
-              expandIconPosition='right'
-              accordion
-              style={{backgroundColor: 'transparent'}}
-            >
-              {
-                questions
-                  .map(parseQuestion)
-                  .map(({question, answer}, i) => (
-                    <Panel
-                      children={answer}
-                      header={question}
-                      key={i}
-                    />
-                  ))
-              }
+            {
+              questions
+                .map(({questions, category}, i) => (
+                  <div key={`container-${i}`}>
+                    <Title key={`title-${i}`} level={3} className={styles.category}>{category}</Title>
+                    {
 
-            </Collapse>
-
+                      questions.map(({question, answer}, j) => (
+                        <Collapse
+                          bordered={false}
+                          expandIcon={() => <Icon className={styles['expand-icon']} type='plus-circle'/>}
+                          expandIconPosition='right'
+                          accordion
+                          key={`collapsable-${j}`}
+                          className={styles.question}
+                        >
+                          <Panel
+                            children={answer}
+                            header={question}
+                            key={`panel-${j}`}
+                          />
+                        </Collapse>
+                      ))
+                    }
+                  </div>
+                ))
+            }
           </Col>
         </Row>
       </Content>
@@ -60,18 +49,4 @@ function App({styles}) {
   );
 }
 
-export default withStyles(({color}) => ({
-  panel: {
-    marginBottom: '24px',
-    backgroundColor: color.display,
-    fontWeight: '500',
-  },
-  title: {
-    marginTop: '20px',
-    marginBottom: '10px',
-    fontFamily: 'Humanst521 BT',
-  },
-  expandIcon: {
-    color: color.primary,
-  },
-}))(App);
+export default App;

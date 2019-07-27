@@ -1,8 +1,6 @@
-function Question({human_fields: {Answer: answer, Question: question}}) {
+export function QuestionFromNetlify({human_fields: {Answer: answer, Question: question}}) {
   return {
     answer,
     question,
   }
 }
-
-export default Question;
