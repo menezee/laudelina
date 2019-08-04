@@ -4,10 +4,12 @@
   font-family: 'Open Sans Condensed';
 }
 
-.expand-icon {
-  color: #F0770E;
-}
-
 .question {
   font-size: 18px !important;
+  background-color: transparent !important;
+}
+
+.icon {
+  color: rgba(237, 109, 2, 1);
+  font-size: 24px;
 }

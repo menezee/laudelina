@@ -12,12 +12,26 @@ body {
   margin-bottom: 24px;
   background-color: white;
   font-weight: 500;
-}
+  border-radius: 5px !important;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.20);
 
-.question-panel--selected {
-  border: 1px solid #F0770E !important;
+  &--selected {
+    border: 1px solid #F0770E !important;
+  }
 }
 
 .question-panel--selected > :first-child {
   color: #F0770E !important;
+}
+
+// Overwrite Antd panel header 💩
+.question-panel > :first-child {
+  padding: 24px 50px 24px 24px !important;
+  line-height: 28px !important;
+  letter-spacing: 1px;
+}
+
+.expand-icon {
+  //color: #F0770E;
+  font-size: 24px;
 }

@@ -1,7 +1,7 @@
 .header {
   &__background {
     background-color: #974602 !important;
-    height: 64px;
+    height: 58px;
     display: flex;
     align-items: center;
   }
@@ -21,11 +21,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 160px !important;
+    height: 128px !important;
 
     &-title {
       color: white !important;
       font-size: 32px !important;
+      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.20);
     }
   }
 
