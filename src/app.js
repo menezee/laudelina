@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Col, Layout, Row } from 'antd';
+import { Col, Layout, Row, BackTop } from 'antd';
 import { Header, SectionOfQuestions } from './components';
 import questions from './data/questions';
 
@@ -8,6 +8,7 @@ const { Content } = Layout;
 function App() {
   return (
     <Fragment>
+      <BackTop/>
       <Header/>
       <Content>
         <Row type='flex' justify='center'>
