@@ -1,10 +1,10 @@
 import React from 'react';
-import {Collapse} from 'antd';
+import { Collapse } from 'antd';
 import styles from './panel.module.scss';
 
-const {Panel: AntdPanel} = Collapse;
+const { Panel: AntdPanel } = Collapse;
 
-function Panel({children, isActive, ...rest}) {
+function Panel({ children, isActive, ...rest }) {
   return (
     <AntdPanel
       {...rest}

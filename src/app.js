@@ -1,10 +1,9 @@
-import React, {Fragment} from 'react';
-import {Col, Layout, Row} from 'antd';
-import Header from './components/header';
-import SectionOfQuestions from './components/section-of-questions';
+import React, { Fragment } from 'react';
+import { Col, Layout, Row } from 'antd';
+import { Header, SectionOfQuestions } from './components';
 import questions from './data/questions';
 
-const {Content} = Layout;
+const { Content } = Layout;
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
           <Col xs={22} sm={20} md={20} lg={19}>
             {
               questions
-                .map(({questions, category}, i) => (
+                .map(({ questions, category }, i) => (
                   <div key={`container-${i}`}>
                     <SectionOfQuestions
                       category={category}
