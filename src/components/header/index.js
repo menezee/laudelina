@@ -10,7 +10,7 @@ function Header() {
   return (
     <>
       <Row type='flex' justify='center' className={styles.header__background}>
-        <Col xs={22} sm={20} md={20} lg={12}>
+        <Col xs={22} sm={20} md={20} lg={19}>
           <Row type='flex' style={{ paddingTop: '10px' }}>
             <Col span={24} className={styles.flex}>
               <img className={styles.header__icon} src={LaudelinaIcon} alt='laudelina icon'/>

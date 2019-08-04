@@ -16,6 +16,7 @@ const collapseIconStyles = {
 
 export const CollapsableQuestion = ({ question, answer }) => {
   const [active, setActive] = useState([]);
+  const collapseQuestion = () => { setActive([]); };
   const iconStyle = active.length ? collapseIconStyles : expandIconStyles;
 
   return (
@@ -30,6 +31,7 @@ export const CollapsableQuestion = ({ question, answer }) => {
       <Panel
         children={answer}
         header={question}
+        collapseQuestion={collapseQuestion}
       />
     </Collapse>
   );

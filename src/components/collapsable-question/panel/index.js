@@ -4,14 +4,18 @@ import styles from './panel.module.scss';
 
 const { Panel: AntdPanel } = Collapse;
 
-function Panel({ children, isActive, ...rest }) {
+function Panel({ children, isActive, collapseQuestion, header, ...rest }) {
   return (
     <AntdPanel
       {...rest}
+      header={header}
       isActive={isActive}
       className={`question-panel ${isActive ? 'question-panel--selected' : ''}`}
     >
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        onClick={collapseQuestion}
+      >
         <div>
           {children}
         </div>
