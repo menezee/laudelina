@@ -67,7 +67,7 @@
     ]
   },
   {
-    "category": "Jornada e Beneficios",
+    "category": "Jornada e Benefícios",
     "questions": [
       {
         "question": "Qual carga horária tenho que trabalhar?",
@@ -104,7 +104,7 @@
     ]
   },
   {
-    "category": "Aposentadoria e Beneficios",
+    "category": "Aposentadoria e Benefícios",
     "questions": [
       {
         "question": "Posso seguir trabalhando mesmo aposentada?",
@@ -145,7 +145,7 @@
     ]
   },
   {
-    "category": "Demissao",
+    "category": "Demissão",
     "questions": [
       {
         "question": "Em quais casos posso ser demitida por justa causa?",
